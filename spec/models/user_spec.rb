@@ -33,6 +33,27 @@ RSpec.describe User, type: :model do
       user2.save
       expect(user2.errors.full_messages).to include("メールアドレスはすでに存在します")
     end
+
+    it 'パスワードがブランクの場合ユーザーは無効であること' do
+      user.password = nil 
+      user.password_confirmation = nil
+      user.valid?
+      expect(user).to_not be_valid
+    end
+
+    it 'パスワードに記号を含む場合ユーザーは無効であること' do
+      user.password = '@@@@@@'
+      user.password_confirmation = '@@@@@@'
+      user.valid?
+      expect(user).to_not be_valid
+    end
+
+    it 'パスワードが５文字以下の場合、ユーザーは無効であること' do
+      user.password = '12345'
+      user.password_confirmation = '12345'
+      user.valid?
+      expect(user).to_not be_valid
+    end
   end
 
 
