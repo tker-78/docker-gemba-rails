@@ -1,2 +1,16 @@
-h1 Users#index
-p Find me in app/views/users/index.html.slim
+.container.col-md-6
+  h1 ユーザー一覧
+
+  table.table.table-hover
+    thead
+      tr 
+        th= User.human_attribute_name(:id)
+        th= User.human_attribute_name(:name)
+        th= User.human_attribute_name(:email)
+
+    tbody
+      - @users.each do |user|
+        tr 
+          th= user.id
+          th= user.name 
+          th= user.email
