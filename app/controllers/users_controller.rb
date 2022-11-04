@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user = User.new(users_params)
     if @user.save
       redirect_to @user, notice: 'ユーザーを作成しました'
     else
@@ -40,7 +41,7 @@ class UsersController < ApplicationController
 
   private
   def users_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
   def get_user

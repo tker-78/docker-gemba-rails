@@ -33,7 +33,14 @@ RSpec.describe "Users", type: :request do
   end
   
   describe 'POST /create' do
-    
+
+
+    it 'ユーザーを作成できる' do
+      user_params = FactoryBot.attributes_for(:user)
+      post users_path, params: { user: user_params }
+      expect(response).to have_http_status(:redirect)
+      expect(flash[:notice]).to include("ユーザーを作成しました")
+    end
   end
   
 end
