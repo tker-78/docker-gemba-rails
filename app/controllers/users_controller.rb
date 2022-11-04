@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :get_user, only: [:edit, :show, :update, :destroy]
+  before_action :get_user, only: [:edit, :show, :destroy, :update]
 
   def index
     @users = User.all
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.save
+    if @user.update(users_params)
       redirect_to @user, notice: 'ユーザー情報をアップデートしました'
     else
       flash[:notice] = 'アップデートに失敗しました'

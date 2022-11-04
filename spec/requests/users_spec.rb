@@ -53,6 +53,15 @@ RSpec.describe "Users", type: :request do
         expect(flash.notice).to include('アップデートに失敗しました') 
       end
     end
+
+    context '属性値が正しい場合' do
+      it 'ユーザーの編集が成功すること' do
+        user_params = {user: FactoryBot.attributes_for(:user) }
+        user_params[:user][:email] = "bbb@gmail.com"
+        put user_path(user.id), params: user_params
+        expect(flash.notice).to include('ユーザー情報をアップデートしました')
+      end
+    end
   end
   
 end
