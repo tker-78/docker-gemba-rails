@@ -23,6 +23,7 @@ RSpec.describe "Users", type: :request do
       get edit_user_path(user)
       expect(response).to have_http_status(:success)
     end
+
   end
 
   describe "GET /show" do
@@ -40,6 +41,17 @@ RSpec.describe "Users", type: :request do
       post users_path, params: { user: user_params }
       expect(response).to have_http_status(:redirect)
       expect(flash[:notice]).to include("ユーザーを作成しました")
+    end
+  end
+
+  describe 'PUT /update' do
+    context '属性が誤った形式の場合' do
+      it 'ユーザーの編集が失敗すること' do
+        user_params = {user: FactoryBot.attributes_for(:user) }
+        user_params[:user][:email] = nil
+        put user_path(user), params: user_params
+        expect(flash.notice).to include('アップデートに失敗しました') 
+      end
     end
   end
   
