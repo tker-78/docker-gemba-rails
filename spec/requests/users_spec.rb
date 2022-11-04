@@ -63,5 +63,12 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe 'DELETE /destroy' do
+    it 'ユーザーの削除ができること' do
+      delete user_path(user)
+      expect(flash.notice).to include('ユーザーを削除しました')
+    end
+  end
   
 end
