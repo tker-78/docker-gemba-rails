@@ -30,7 +30,10 @@ RSpec.describe "Users", type: :request do
       get user_path(user)
       expect(response).to have_http_status(:success)
     end
-
   end
-
+  
+  describe 'POST /create' do
+    
+  end
+  
 end
