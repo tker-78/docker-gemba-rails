@@ -10,7 +10,12 @@ html
   body
     = render 'layouts/header'
     .container
-      - if flash.notice.present?
+      - flash.each do |message_type, message|
         .alert.alert-success
-          = flash.notice
+          = message
     = yield
+
+    .container.col-md-6
+      - if Rails.env.development?
+        = debug(params)
+        = params

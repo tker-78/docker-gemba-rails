@@ -8,6 +8,16 @@ RSpec.describe "Sessions", type: :request do
       get login_path
       expect(response).to have_http_status(:success)
     end
+
+    it 'emailの入力欄が表示されていること' do
+      get login_path
+      expect(response.body).to include('session_email')
+    end
+
+    it 'passwordの入力欄が表示されていること' do
+      get login_path
+      expect(response.body).to include('session_password')
+    end
   end
 
   describe "POST /create" do

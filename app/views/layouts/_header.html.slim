@@ -3,4 +3,7 @@ header.navbar.navbar-light.bg-light
   nav
   ul.nav.navbar-right.header-menu
     li =link_to 'Top', root_path, class:'nav-link'
-    li =link_to 'log in', new_user_path, class: 'nav-link'
+    - if current_user
+      li =link_to 'logout', logout_path, method: :delete, class: 'nav-link'
+    - else 
+      li =link_to 'log in', login_path, class: 'nav-link'
