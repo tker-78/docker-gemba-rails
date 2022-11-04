@@ -31,6 +31,16 @@ RSpec.describe "Users", type: :request do
       get user_path(user)
       expect(response).to have_http_status(:success)
     end
+
+    it 'ユーザー名が表示されている' do
+      get user_path(user)
+      expect(response.body).to include(user.name)
+    end
+
+    it 'メールアドレスが表示されている' do
+      get user_path(user)
+      expect(response.body).to include(user.email)
+    end
   end
   
   describe 'POST /create' do
