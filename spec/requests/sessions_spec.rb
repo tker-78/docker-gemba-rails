@@ -27,7 +27,15 @@ RSpec.describe "Sessions", type: :request do
       it 'ログインできること' do
         session_params = { session: {email: user.email, password: user.password }}
         post login_path, params: session_params
-        expect(flash.notice).to include('ログインしました')
+        expect(flash[:success]).to include('ログインしました')
+      end
+    end
+
+    context '間違ったパラメータを渡した場合' do
+      it 'エラーメッセージが表示されること' do
+        session_params = { session: {email: nil, password: nil }}
+        post login_path, params: session_params
+        expect(flash[:danger]).to include('入力された情報が間違っています')
       end
     end
   end
@@ -42,7 +50,7 @@ RSpec.describe "Sessions", type: :request do
       it 'ログアウトできること' do
         delete logout_path
         expect(response).to have_http_status(:redirect)
-        expect(flash.notice).to include('ログアウトしました')
+        expect(flash[:success]).to include('ログアウトしました')
       end
     end
 

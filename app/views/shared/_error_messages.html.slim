@@ -1,0 +1,6 @@
+.container 
+  - if @user.errors.any?
+    #error_explanation.alert.alert-danger
+    ul
+      - @user.errors.full_messages.each do |e|
+        li= e
