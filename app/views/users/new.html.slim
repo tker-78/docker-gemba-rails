@@ -2,7 +2,8 @@
   h1 ユーザー新規登録
 
 .container.col-md-4
-  = form_with model: @user do |f|
+  = form_with model: @user, local: true do |f|
+    = render 'shared/error_messages'
     .form-group 
       = f.label :name
       = f.text_field :name, class: 'form-control', id: 'user_name'

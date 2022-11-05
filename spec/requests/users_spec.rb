@@ -50,7 +50,7 @@ RSpec.describe "Users", type: :request do
       user_params = FactoryBot.attributes_for(:user)
       post users_path, params: { user: user_params }
       expect(response).to have_http_status(:redirect)
-      expect(flash[:notice]).to include("ユーザーを作成しました")
+      expect(flash[:success]).to include("ユーザーを作成しました")
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe "Users", type: :request do
         user_params = {user: FactoryBot.attributes_for(:user) }
         user_params[:user][:email] = nil
         put user_path(user), params: user_params
-        expect(flash.notice).to include('アップデートに失敗しました') 
+        expect(flash[:danger]).to include('アップデートに失敗しました') 
       end
     end
 
@@ -69,7 +69,7 @@ RSpec.describe "Users", type: :request do
         user_params = {user: FactoryBot.attributes_for(:user) }
         user_params[:user][:email] = "bbb@gmail.com"
         put user_path(user.id), params: user_params
-        expect(flash.notice).to include('ユーザー情報をアップデートしました')
+        expect(flash[:success]).to include('ユーザー情報をアップデートしました')
       end
     end
   end
@@ -77,7 +77,7 @@ RSpec.describe "Users", type: :request do
   describe 'DELETE /destroy' do
     it 'ユーザーの削除ができること' do
       delete user_path(user)
-      expect(flash.notice).to include('ユーザーを削除しました')
+      expect(flash[:success]).to include('ユーザーを削除しました')
     end
   end
   

@@ -12,9 +12,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(users_params)
     if @user.save
-      redirect_to @user, notice: 'ユーザーを作成しました'
+      flash[:success] = 'ユーザーを作成しました'
+      redirect_to @user
     else
-      flash[:notice] = 'ユーザーの作成に失敗しました'
+      flash.now[:danger] = 'ユーザーの作成に失敗しました'
       render 'new'
     end
   end
@@ -24,9 +25,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(users_params)
-      redirect_to @user, notice: 'ユーザー情報をアップデートしました'
+      flash[:success] = 'ユーザー情報をアップデートしました'
+      redirect_to @user
     else
-      flash[:notice] = 'アップデートに失敗しました'
+      flash.now[:danger] = 'アップデートに失敗しました'
       render 'edit'
     end
   end
@@ -36,7 +38,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to root_path, notice: 'ユーザーを削除しました'
+    flash[:success] = 'ユーザーを削除しました'
+    redirect_to root_path
   end
 
   private
