@@ -1,2 +1,10 @@
-h1 Tasks#new
-p Find me in app/views/tasks/new.html.slim
+.container.col-md-6 
+  h1 タスク登録
+  = form_with model: @task, local: true do |f|
+    .form-group 
+      = f.label :name
+      = f.text_field :name, class: 'form-control'
+    .form-group 
+      = f.label :description
+      = f.text_field :description, class: 'form-control'
+    = f.submit 'タスク作成', class: 'btn btn-primary'

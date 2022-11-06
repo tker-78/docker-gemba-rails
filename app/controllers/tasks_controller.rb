@@ -5,10 +5,11 @@ class TasksController < ApplicationController
   end
 
   def new
+    @task = current_user.tasks.new
   end
 
   def create
-    @task = current_user.new(task_params)
+    @task = current_user.tasks.new(task_params)
     if @task.save
       flash[:success] = 'タスクを作成しました'
       redirect_to @task
