@@ -1,13 +1,14 @@
 class TasksController < ApplicationController
   before_action :get_task, only: %i(edit show update destroy)
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
   end
 
   def new
   end
 
   def create
+    @task = current_user.new(task_params)
     if @task.save
       flash[:success] = 'タスクを作成しました'
       redirect_to @task
@@ -45,6 +46,6 @@ class TasksController < ApplicationController
   end
 
   def get_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 end

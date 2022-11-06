@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :user
+  has_many :tasks
   has_secure_password
   validates :name, presence: true
   EMAIL_REGEX = /\A[0-9a-z]+@[0-9a-z]+\.[0-9a-z]+\z/
