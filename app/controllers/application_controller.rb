@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :login_required
 
   def login_required
-    redirect_to root_path unless current_user
+    redirect_to login_path unless current_user
   end
 
   private

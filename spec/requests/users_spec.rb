@@ -4,6 +4,10 @@ RSpec.describe "Users", type: :request do
 
   let(:user) { FactoryBot.create(:user) }
 
+  before do
+    login(user)
+  end
+
   describe "GET /index" do
     it "returns http success" do
       get root_path
@@ -43,12 +47,11 @@ RSpec.describe "Users", type: :request do
     end
   end
   
-  describe 'POST /create' do
+  describe 'POST /create'  do
 
-
-    it 'ユーザーを作成できる' do
-      user_params = FactoryBot.attributes_for(:user)
-      post users_path, params: { user: user_params }
+    it 'ユーザーを作成できる'  do
+      user_params = FactoryBot.attributes_for(:user, email: 'ccc@gmail.com')
+      post users_path, params:  { user: user_params } 
       expect(response).to have_http_status(:redirect)
       expect(flash[:success]).to include("ユーザーを作成しました")
     end
@@ -79,6 +82,12 @@ RSpec.describe "Users", type: :request do
       delete user_path(user)
       expect(flash[:success]).to include('ユーザーを削除しました')
     end
+  end
+
+  private
+  def login(user)
+    sessions_params = { session: { email: user.email, password: user.password }}
+    post login_path, params: sessions_params
   end
   
 end

@@ -7,9 +7,9 @@ RSpec.describe "Tasks", type: :request do
 
   context 'ログインしていないとき' do
     describe 'GET /index' do
-      it 'rootページにリダイレクトされること' do
+      it 'loginページにリダイレクトされること' do
         get tasks_path
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(login_path)
       end
     end
 

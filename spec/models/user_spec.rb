@@ -18,13 +18,13 @@ RSpec.describe User, type: :model do
     it 'メールアドレスが@を含まない場合エラーメッセージを出力すること' do
       user.email = 'aaagmail.com'
       user.save
-      expect(user.errors.full_messages).to include("メールアドレスは不正な値です")
+      expect(user.errors.full_messages).to include("メールアドレスが不正な値です")
     end
 
     it 'メールアドレスが.を含まない場合エラーメッセージを出力すること' do
       user.email = 'aaa@gmailcom'
       user.save
-      expect(user.errors.full_messages).to include("メールアドレスは不正な値です")
+      expect(user.errors.full_messages).to include("メールアドレスが不正な値です")
     end
 
     it 'メールアドレスに重複がある場合ユーザーは無効であること' do
