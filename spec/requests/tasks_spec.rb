@@ -18,13 +18,32 @@ RSpec.describe "Tasks", type: :request do
   context 'ログインしているとき' do
     before do
       login(user)
+      task
     end
 
     describe 'GET /index' do
       it 'タスク情報が表示されていること' do
-        task
         get tasks_path
         expect(response.body).to include(task.name)
+      end
+
+
+      it '詳細ボタンが表示されていること' do
+        get tasks_path
+        expect(response.body).to include('詳細')
+      end
+
+      it '削除ボタンが表示されていること' do
+        get tasks_path
+        expect(response.body).to include('削除')
+      end
+    end
+
+    describe 'GET /show' do
+      it 'タスク情報が表示されていること' do
+        get task_path(task)
+        expect(response.body).to include(task.name)
+        expect(response.body).to include(task.description)
       end
     end
   end

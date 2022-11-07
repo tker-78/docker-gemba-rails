@@ -1,2 +1,12 @@
-h1 Tasks#show
-p Find me in app/views/tasks/show.html.slim
+.container.col-md-6 
+  h1 タスク詳細
+  p= link_to 'タスク一覧', tasks_path, class: 'btn btn-primary'
+  table.table
+    thead 
+      tr 
+        th= Task.human_attribute_name(:name)
+        th= Task.human_attribute_name(:description)
+    tbody 
+      tr 
+        td= @task.name
+        td= @task.description
